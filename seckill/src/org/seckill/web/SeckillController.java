@@ -92,7 +92,7 @@ public class SeckillController {
 		SeckillResult<SeckillExecution> result;
 
 		try {
-			SeckillExecution execution = seckillService.executeSeckill(seckillId, phone, md5);
+			SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, phone, md5);
 			result = new SeckillResult<SeckillExecution>(true, execution);
 		} catch (RepeatKillException e) {
 			SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.REPEAT_KILL);
@@ -114,7 +114,7 @@ public class SeckillController {
 	@RequestMapping(value = "/time/now", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String time() {
-
+		
 		Date now = new Date();
 //		return new SeckillResult<Long>(true, now.getTime());
 		return JSONObject.toJSON(new SeckillResult<Long>(true, now.getTime())).toString();
